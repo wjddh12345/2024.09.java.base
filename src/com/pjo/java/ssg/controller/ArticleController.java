@@ -1,5 +1,6 @@
 package com.pjo.java.ssg.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,9 +13,11 @@ public class ArticleController extends Controller {
 	private String command;
 	private String actionMethodName;
 
-	public ArticleController(Scanner sc, List<Article> articles) {
+	public ArticleController(Scanner sc) {
 		this.articles = articles;
 		this.sc = sc;
+		
+		articles = new ArrayList<Article>();
 	}
 
 	public void doAction(String command, String actionMethodName) {
@@ -40,7 +43,7 @@ public class ArticleController extends Controller {
 		}
 	}
 
-	public void doWrite() {
+	private void doWrite() {
 		int id = articles.size() + 1;
 		String regDate = Util.getNowDateStr();
 		System.out.printf("제목 : ");
@@ -55,7 +58,7 @@ public class ArticleController extends Controller {
 
 	}
 
-	public void showList() {
+	private void showList() {
 		if (articles.size() == 0) {
 			System.out.println("게시물이 없다.");
 			return;
@@ -69,7 +72,7 @@ public class ArticleController extends Controller {
 		}
 	}
 
-	public void showDetail() {
+	private void showDetail() {
 		String[] commandBits = command.split(" ");
 		int id = Integer.parseInt(commandBits[2]);
 
@@ -90,7 +93,7 @@ public class ArticleController extends Controller {
 		return;
 	}
 
-	public void doModify() {
+	private void doModify() {
 		String[] commandBits = command.split(" ");
 		int id = Integer.parseInt(commandBits[2]);
 
@@ -112,7 +115,7 @@ public class ArticleController extends Controller {
 		System.out.printf("%d의 게시물이 수정되었습니다\n", id);
 	}
 
-	public void doDelete() {
+	private void doDelete() {
 		String[] commandBits = command.split(" ");
 		int id = Integer.parseInt(commandBits[2]);
 
@@ -149,5 +152,11 @@ public class ArticleController extends Controller {
 		}
 		return null;
 	}
-
+	
+	public void makeTestData() {
+		System.out.println("테스트를 위한 데이터를 생성합니다.");
+		articles.add(new Article(1, Util.getNowDateStr(), "제목1", "내용1", 10));
+		articles.add(new Article(2, Util.getNowDateStr(), "제목2", "내용2", 20));
+		articles.add(new Article(3, Util.getNowDateStr(), "제목3", "내용3", 100));
+}
 }
