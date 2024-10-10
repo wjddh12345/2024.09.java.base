@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.pjo.java.ssg.controller.ArticleController;
+import com.pjo.java.ssg.controller.Controller;
 import com.pjo.java.ssg.controller.MemberController;
 import com.pjo.java.ssg.dto.Article;
 import com.pjo.java.ssg.dto.Member;
@@ -39,37 +40,38 @@ public class App {
 				if (command.length() == 0) {
 					continue;
 				}
-
+				
 				if (command.equals("system exit")) {
 					break;
-				} 
-				else if (command.equals("member join")) {
-					memberController.doJoin();
-				} 
+				}
+				
+				String[] commandBits = command.split(" ");
+				
+				if ( commandBits.length == 1) { 
+					System.out.println("존재하지 않는 명령어입니다.");
+					continue;
+				}
+				
+				String controllerName = commandBits[0];
+				String actionMethodName = commandBits[1];
+				
+				Controller controller = null;
 
-				else if (command.equals("article write")) {
-					articleController.doWrite();
-				} 
-				
-				else if (command.equals("article list")) {
-					articleController.showList();
+				if (controllerName.equals("article")) {
+					controller = articleController;
 				}
 				
-				else if ( command.startsWith("article detail ") ) {
-					articleController.showDetail(command);
-				}
-				
-				else if ( command.startsWith("article modify ") ) {
-					articleController.doModify(command);
-				}
-				
-				else if ( command.startsWith("article delete ") ) {
-					articleController.doDelete(command);
+				else if (controllerName.equals("member")) {
+					controller = memberController;
 				}
 				
 				else {
-					System.out.printf("%s(은)는 존재하지 않는 명령어 입니다.\n", command);
+					System.out.println("존재하지 않는 명령어 입니다.");
+					continue;
 				}
+				
+				controller.doAction(command, actionMethodName);
+				
 			}
 			
 			sc.close();
