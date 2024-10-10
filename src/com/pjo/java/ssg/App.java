@@ -5,8 +5,6 @@ import java.util.Scanner;
 import com.pjo.java.ssg.controller.ArticleController;
 import com.pjo.java.ssg.controller.Controller;
 import com.pjo.java.ssg.controller.MemberController;
-import com.pjo.java.ssg.dto.Article;
-import com.pjo.java.ssg.util.Util;
 
 public class App {
 	
@@ -24,6 +22,7 @@ public class App {
 			ArticleController articleController = new ArticleController(sc);
 			
 			articleController.makeTestData();
+			memberController.makeTestData();
 			
 			while (true) { 
 				System.out.printf("명령어) ");

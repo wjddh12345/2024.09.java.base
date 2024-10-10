@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.pjo.java.ssg.dto.Article;
 import com.pjo.java.ssg.dto.Member;
 import com.pjo.java.ssg.util.Util;
 
@@ -136,5 +137,11 @@ public class MemberController extends Controller {
 		
 		return members.get(index);
 	}
-
+	
+	public void makeTestData() {
+		System.out.println("테스트를 위한 회원 데이터를 생성합니다.");
+		members.add(new Member(1, Util.getNowDateStr(), "admin", "admin", "관리자"));
+		members.add(new Member(2, Util.getNowDateStr(), "user1", "user1", "유저1"));
+		members.add(new Member(3, Util.getNowDateStr(), "user2", "user2", "유저2"));
+	}
 }
