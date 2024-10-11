@@ -1,6 +1,7 @@
 package com.pjo.java.ssg.dto;
 
 public class Member extends Dto{
+	
 	public String loginId;
 	public String loginPw;
 	public String name;

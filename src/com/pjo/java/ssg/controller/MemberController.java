@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.pjo.java.ssg.dto.Article;
 import com.pjo.java.ssg.dto.Member;
 import com.pjo.java.ssg.util.Util;
 
@@ -13,7 +12,7 @@ public class MemberController extends Controller {
 	private Scanner sc;
 	private String command;
 	private String actionMethodName;
-	private Member loginedMember;
+	
 	
 	public MemberController(Scanner sc) {
 		this.members = members;
@@ -27,7 +26,7 @@ public class MemberController extends Controller {
 		this.actionMethodName = actionMethodName;
 		
 		switch (actionMethodName) {
-		case "join" :
+		case "join":
 			doJoin();
 			break;
 		case "login":
@@ -40,10 +39,6 @@ public class MemberController extends Controller {
 			System.err.println("존재하지 않는 명령어 입니다.");
 			break;
 		}
-	}
-	
-	private boolean isLogined() {
-		return loginedMember != null;		
 	}
 	
 	private void doLogout() {
